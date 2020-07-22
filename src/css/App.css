@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  height:400px;
+  background-color:yellow;
 }
 
 .App-logo {
@@ -29,4 +31,30 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background-color: #abcdef;
+}
+#footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background-color: #abcdef;
+}
+#content {
+    position: fixed;
+    top: 100px;
+    bottom: 100px;
+    left: 0;
+    right: 0;
+    background-color: #F63;
+    overflow: auto;
 }
