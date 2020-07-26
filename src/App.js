@@ -5,6 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Fab from '@material-ui/core/Fab';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import './css/App.css';
 
 function TabPanel(props) {
@@ -73,6 +74,7 @@ export default function NavTabs() {
 	  <div class="box">
 		  <div class="row header" style={{zIndex:1}}>
 			  <AppBar position="static">
+				
 				<Tabs
 				  variant="scrollable"
 				  value={value}
@@ -81,6 +83,7 @@ export default function NavTabs() {
 				>
 				  <LinkTab label="Input Text" href="/drafts" {...a11yProps(0)} />
 				  <LinkTab label="JSON" href="/trash" {...a11yProps(1)} />
+				  <GitHubIcon fontSize='large' style={{alignSelf:"center", position:"absolute", right:"0px", marginRight:"10px", cursor:"hand"}} onClick={()=> window.open("https://github.com/sarangmane607/json-tree-viewer", "_blank")}/>
 				</Tabs>
 			  </AppBar>
 		  </div>
