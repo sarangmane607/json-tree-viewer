@@ -33,28 +33,35 @@
   }
 }
 
-#header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100px;
-    background-color: #abcdef;
+html,
+body {
+  height: 100%;
+  margin: 0;
 }
-#footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100px;
-    background-color: #abcdef;
+
+.box {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
 }
-#content {
-    position: fixed;
-    top: 100px;
-    bottom: 100px;
-    left: 0;
-    right: 0;
-    background-color: #F63;
-    overflow: auto;
+
+.box .row {
+  /*border: 1px dotted grey;*/
+}
+
+.box .row.header {
+  flex: 0 1 auto;
+  /* The above is shorthand for:
+  flex-grow: 0,
+  flex-shrink: 1,
+  flex-basis: auto
+  */
+}
+
+.box .row.content {
+  flex: 1 1 auto;
+}
+
+.box .row.footer {
+  flex: 0 1 40px;
 }
