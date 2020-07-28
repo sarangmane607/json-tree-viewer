@@ -69,6 +69,22 @@ export default function NavTabs() {
   };
 
   console.log("value : ", value);
+  let json = {
+		"firstName": "John",
+		"lastName": "Smith",
+		"gender": "man",
+		"age": 32,
+		"address": {
+			"streetAddress": "21 2nd Street",
+			"city": "New York",
+			"state": "NY",
+			"postalCode": "10021"
+		},
+		"phoneNumbers": [
+			{ "type": "home", "number": "212 555-1234" },
+			{ "type": "fax", "number": "646 555-4567" }
+		]
+	};
   return (
     <div className={classes.root}>
 	  <div class="box">
@@ -83,7 +99,7 @@ export default function NavTabs() {
 				>
 				  <LinkTab label="Input Text" href="/drafts" {...a11yProps(0)} />
 				  <LinkTab label="JSON" href="/trash" {...a11yProps(1)} />
-				  <GitHubIcon fontSize='large' style={{alignSelf:"center", position:"absolute", right:"0px", marginRight:"10px", cursor:"hand"}} onClick={()=> window.open("https://github.com/sarangmane607/json-tree-viewer", "_blank")}/>
+				  <GitHubIcon fontSize='1.8rem' style={{alignSelf:"center", position:"absolute", right:"0px", marginRight:"10px", cursor:"hand"}} onClick={()=> window.open("https://github.com/sarangmane607/json-tree-viewer", "_blank")}/>
 				</Tabs>
 			  </AppBar>
 		  </div>
