@@ -71,9 +71,36 @@ export default function NavTabs() {
 	};
 
 
-	const handleTextareaChange = (event, newValue) => {
+	const handleTextareaChange = (event) => {
 		setValue({ value: state.value, jsonTxt: event.target.value });
 		console.log("jsonTxt : ", event.target.value);
+	};
+
+	const formatJSON = (event) => {
+		try{
+			let parsedJSON = JSON.parse(state.jsonTxt);
+			let formattedJSON = JSON.stringify(parsedJSON, null, 4);
+			setValue({ value: state.value, jsonTxt: formattedJSON});
+			console.log("formattedJSON : ", formattedJSON);
+		}catch(e){
+			console.log("error in parsing inside formatJSON ");
+		}
+	};
+
+	const removeWhiteSpace = (event) => {
+		try{
+			let parsedJSON = JSON.parse(state.jsonTxt);
+			let plainJSON = JSON.stringify(parsedJSON);
+			setValue({ value: state.value, jsonTxt: plainJSON});
+			console.log("plainJSON : ", plainJSON);
+		}catch(e){
+			console.log("error in parsing inside removeWhiteSpace ");
+		}
+	};
+
+	const clearTextarea = (event) => {
+		setValue({ value: state.value, jsonTxt: ""});
+		console.log("cleard ");
 	};
 
 	console.log("value : ", state.value);
@@ -107,11 +134,17 @@ export default function NavTabs() {
 						<div class="box">
 							<div class="row content">
 								<div style={{ position: "absolute", right: "0px", bottom: "0px", marginBottom: "15px" }}>
-									<Fab size='small' variant="extended" style={{ float: "right", textTransform: "none", marginTop: "10px", marginRight: "10px" }}> Clear </Fab>
-									<Fab size='small' variant="extended" style={{ float: "right", textTransform: "none", marginTop: "10px", marginRight: "10px" }}> Remove White Space </Fab>
+									<Fab size='small' variant="extended" style={{ float: "right", textTransform: "none", marginTop: "10px", marginRight: "10px" }}
+										onClick={clearTextarea}
+									> Clear </Fab>
+									<Fab size='small' variant="extended" style={{ float: "right", textTransform: "none", marginTop: "10px", marginRight: "10px" }}
+										onClick={removeWhiteSpace}
+									> Remove White Space </Fab>
 									<Fab size='small' variant="extended" style={{ float: "right", textTransform: "none", marginTop: "10px", marginRight: "10px" }}> Copy </Fab>
 									<Fab size='small' variant="extended" style={{ float: "right", textTransform: "none", marginTop: "10px", marginRight: "10px" }}> Paste </Fab>
-									<Fab size='small' variant="extended" style={{ float: "right", textTransform: "none", marginTop: "10px", marginRight: "10px" }}> Format </Fab>
+									<Fab size='small' variant="extended" style={{ float: "right", textTransform: "none", marginTop: "10px", marginRight: "10px" }} 
+										onClick={formatJSON}
+									> Format </Fab>
 								</div>
 								<textarea onChange={handleTextareaChange}
 									style={{ height: "100%", width: "100%", boxSizing: "border-box", resize: "none", border: "none", outline: "none" }}
