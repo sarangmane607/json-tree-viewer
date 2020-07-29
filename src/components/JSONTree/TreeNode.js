@@ -2,9 +2,6 @@ import React from 'react';
 
 
 class TreeNode extends React.Component {
-    constructor() {
-        super();
-    }
 
     render() {
         let key, value;

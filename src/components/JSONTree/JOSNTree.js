@@ -1,11 +1,7 @@
 import React from 'react';
-import TreeNode from './TreeNode';
 
 class JSONTree extends React.Component {
-    constructor() {
-        super();
-    }
-
+    
     render() {
         /*if(this.props.level > 2){
             return "";
@@ -27,9 +23,9 @@ class JSONTree extends React.Component {
                     <div>
                         {this.props.spacers != null &&
                             this.props.spacers.map((spacer, index) =>{
-                                if(spacer == "├"){
+                                if(spacer === "├"){
                                     return <span key={"s" + this.props.path + "." + index}>│&nbsp;</span>;
-                                }else if(spacer == "└"){
+                                }else if(spacer === "└"){
                                     return <span key={"s" + this.props.path + "." + index}>&nbsp;&nbsp;</span>;
                                 }else{
                                     return <span key={"s" + this.props.path + "." + index}>&nbsp;&nbsp;</span>;
@@ -53,16 +49,16 @@ class JSONTree extends React.Component {
                     Object.entries(this.props.json).map(([key, value], index) => {
                         //console.log("i:" + (i++) +" key : " + this.props.path + "." + key + " value : " + value);
                         if (value == null || typeof (value) != "object") {
-                            let level = this.props.level + 1;
-                            /*if(level > 2){
+                            /*let level = this.props.level + 1;
+                            if(level > 2){
                                 return "";
                             }*/
                             return <React.Fragment>
                                 {this.props.spacers != null &&
                                     this.props.spacers.map((spacer, index) =>{
-                                        if(spacer == "├"){
+                                        if(spacer === "├"){
                                             return <span key={"s" + this.props.path + "." + index}>│&nbsp;</span>;
-                                        }else if(spacer == "└"){
+                                        }else if(spacer === "└"){
                                             return <span key={"s" + this.props.path + "." + index}>&nbsp;&nbsp;</span>;
                                         }else{
                                             return <span key={"s" + this.props.path + "." + index}>&nbsp;&nbsp;</span>;
@@ -70,10 +66,10 @@ class JSONTree extends React.Component {
                                     })
                                 }
                                 {
-                                   (currentSpacer == "├" ? <span key={"cs" + this.props.path}>│&nbsp;</span> : <span key={"cs" + this.props.path}>&nbsp;&nbsp;</span>)
+                                   (currentSpacer === "├" ? <span key={"cs" + this.props.path}>│&nbsp;</span> : <span key={"cs" + this.props.path}>&nbsp;&nbsp;</span>)
                                 }
                                 {
-                                    <span key={"s" + this.props.path + "."}>{countOfKeys - 1 == index ? "└" : "├"}</span>
+                                    <span key={"s" + this.props.path + "."}>{countOfKeys - 1 === index ? "└" : "├"}</span>
                                 }
                                 {
                                     <span key={"d" + this.props.path + "." + key} style={{color:"#ff9800"}}>
@@ -91,7 +87,7 @@ class JSONTree extends React.Component {
                                 level={this.props.level + 1}
                                 path={this.props.path + "." + key}
                                 jkey={key}
-                                isLastElement={countOfKeys - 1 == index}
+                                isLastElement={countOfKeys - 1 === index}
                                 spacers={[...this.props.spacers, currentSpacer]}/>;
                         }
                     })
