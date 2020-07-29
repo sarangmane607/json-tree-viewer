@@ -64,6 +64,7 @@ export default function NavTabs() {
 	const classes = useStyles();
 	console.log("classes:", classes);
 	const [state, setValue] = React.useState({ value: 0, jsonTxt: "" });
+	const textAreaRef = React.useRef(null);
 
 	const handleChange = (event, newValue) => {
 		setValue({ value: newValue, jsonTxt: state.jsonTxt });
@@ -100,15 +101,47 @@ export default function NavTabs() {
 
 	const clearTextarea = (event) => {
 		setValue({ value: state.value, jsonTxt: ""});
+		textAreaRef.current.focus();
 		console.log("cleard ");
 	};
 
+	const copyTextarea = (event) => {
+		navigator.clipboard.writeText(state.jsonTxt)
+		.then(() => {
+		})
+		.catch(err => {
+			alert("Error while copying to clipboard ", err);
+			console.log('Something went wrong', err);
+		});
+
+		console.log("copyTextarea ");
+	};
+
+	const pasteTextarea = async function paste(event) {
+		textAreaRef.current.focus();
+		
+		navigator.clipboard.readText()
+			.then(text =>{
+			setValue({ value: state.value, jsonTxt: text});
+		})
+		.catch(err => {
+			alert(err);
+			console.log('Something went wrong', err);
+		});
+	}
+	
+	   
+
 	console.log("value : ", state.value);
-	let parsedJSON = {};
-	try{
-		parsedJSON = JSON.parse(state.jsonTxt);
-	}catch(e){
-		parsedJSON = {error:"error while parsing json: " + e };
+	let parsedJSON = null;
+	if(state.jsonTxt != null && state.jsonTxt.length > 0){
+		try{
+			parsedJSON = JSON.parse(state.jsonTxt);
+		}catch(e){
+			parsedJSON = {error:"error while parsing json: " + e };
+		}
+	}else{
+		parsedJSON = {};
 	}
 	console.log("tab :" + state.value + " jsontxt : " + state.jsonTxt);
 	return (
@@ -140,13 +173,18 @@ export default function NavTabs() {
 									<Fab size='small' variant="extended" style={{ float: "right", textTransform: "none", marginTop: "10px", marginRight: "10px" }}
 										onClick={removeWhiteSpace}
 									> Remove White Space </Fab>
-									<Fab size='small' variant="extended" style={{ float: "right", textTransform: "none", marginTop: "10px", marginRight: "10px" }}> Copy </Fab>
-									<Fab size='small' variant="extended" style={{ float: "right", textTransform: "none", marginTop: "10px", marginRight: "10px" }}> Paste </Fab>
+									<Fab size='small' variant="extended" style={{ float: "right", textTransform: "none", marginTop: "10px", marginRight: "10px" }}
+										onClick={copyTextarea}
+									> Copy </Fab>
+									<Fab size='small' variant="extended" style={{ float: "right", textTransform: "none", marginTop: "10px", marginRight: "10px" }}
+										onClick={pasteTextarea}
+									> Paste </Fab>
 									<Fab size='small' variant="extended" style={{ float: "right", textTransform: "none", marginTop: "10px", marginRight: "10px" }} 
 										onClick={formatJSON}
 									> Format </Fab>
 								</div>
 								<textarea onChange={handleTextareaChange}
+									ref={textAreaRef}
 									style={{ height: "100%", width: "100%", boxSizing: "border-box", resize: "none", border: "none", outline: "none" }}
 									autocomplete="off"
 									value={state.jsonTxt}
