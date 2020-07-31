@@ -129,8 +129,6 @@ export default function NavTabs() {
 			console.log('Something went wrong', err);
 		});
 	}
-	
-	   
 
 	console.log("value : ", state.value);
 	let parsedJSON = null;
