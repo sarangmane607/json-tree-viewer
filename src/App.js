@@ -185,7 +185,7 @@ export default function NavTabs() {
 								</div>
 								<textarea onChange={handleTextareaChange}
 									ref={textAreaRef}
-									style={{ height: "100%", width: "100%", boxSizing: "border-box", resize: "none", border: "none", outline: "none" }}
+									style={{ height: "100%", width: "100%", boxSizing: "border-box", resize: "none", border: "none", outline: "none", whiteSpace: "nowrap", overflow: "auto" }}
 									autocomplete="off"
 									value={state.jsonTxt}
 								/>
