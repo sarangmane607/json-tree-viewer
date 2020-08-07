@@ -74,7 +74,7 @@ export default function NavTabs() {
 
 	const handleTextareaChange = (event) => {
 		setValue({ value: state.value, jsonTxt: event.target.value });
-		console.log("jsonTxt : ", event.target.value);
+		//console.log("jsonTxt : ", event.target.value);
 	};
 
 	const formatJSON = (event) => {
@@ -82,7 +82,7 @@ export default function NavTabs() {
 			let parsedJSON = JSON.parse(state.jsonTxt);
 			let formattedJSON = JSON.stringify(parsedJSON, null, 4);
 			setValue({ value: state.value, jsonTxt: formattedJSON});
-			console.log("formattedJSON : ", formattedJSON);
+			//console.log("formattedJSON : ", formattedJSON);
 		}catch(e){
 			console.log("error in parsing inside formatJSON ");
 		}
@@ -93,7 +93,7 @@ export default function NavTabs() {
 			let parsedJSON = JSON.parse(state.jsonTxt);
 			let plainJSON = JSON.stringify(parsedJSON);
 			setValue({ value: state.value, jsonTxt: plainJSON});
-			console.log("plainJSON : ", plainJSON);
+			//console.log("plainJSON : ", plainJSON);
 		}catch(e){
 			console.log("error in parsing inside removeWhiteSpace ");
 		}
@@ -130,24 +130,26 @@ export default function NavTabs() {
 		});
 	}
 
-	console.log("value : ", state.value);
-	let parsedJSON = null;
-	if(state.jsonTxt != null && state.jsonTxt.length > 0){
-		try{
-			parsedJSON = JSON.parse(state.jsonTxt);
-		}catch(e){
-			parsedJSON = {error:"error while parsing json: " + e };
+	const getParsedJSON = () => {
+		let parsedJSON = null;
+		if(state.jsonTxt != null && state.jsonTxt.length > 0){
+			try{
+				parsedJSON = JSON.parse(state.jsonTxt);
+			}catch(e){
+				parsedJSON = {error:"error while parsing json: " + e };
+			}
+		}else{
+			parsedJSON = {};
 		}
-	}else{
-		parsedJSON = {};
+		return parsedJSON;
 	}
-	console.log("tab :" + state.value + " jsontxt : " + state.jsonTxt);
+	//console.log("tab :" + state.value + " jsontxt : " + state.jsonTxt);
 	return (
 		<div className={classes.root}>
 			<div class="box">
 				<div class="row header" style={{ zIndex: 1 }}>
 					<AppBar position="static">
-
+ 
 						<Tabs
 							variant="scrollable"
 							value={state.value}
@@ -190,12 +192,15 @@ export default function NavTabs() {
 							</div>
 						</div>
 					</TabPanel>
-					<TabPanel value={state.value} index={1} style={{ height: "100%", fontFamily: "Courier New", fontSize: "medium" }}>
+					<TabPanel value={state.value} index={1} style={{ height: "100%", fontFamily: "Courier New", fontSize: "small", color: "black" }}>
 						<div class="box">
 							<div class="row content">
 								<div style={{ height: "100%" }}>
+									{state.value == 1 && 
+										<JOSNTree json={{ "JSON": getParsedJSON() }} level={0} path="" isLastElement={true} spacers={[]} expand={true} />
+									}
 									<br />
-									<JOSNTree json={{ "JSON": parsedJSON }} level={0} path="" isLastElement={true} spacers={[]} />
+									<br />
 								</div>
 							</div>
 						</div>

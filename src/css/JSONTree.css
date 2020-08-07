@@ -1,0 +1,26 @@
+.oprop {
+    color:#1688ea;
+    font-weight:bold;
+    cursor: pointer;
+    font-size: small;
+    font-family: roboto;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 4px;
+}
+
+.oprop:hover {
+    background-color: #e0e0e0;
+}
+
+.atprop {
+    color: #c10000;
+    font-family: roboto;
+    font-size: small;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 4px;
+}
+.atprop:hover {
+    background-color: #e0e0e0;
+}
