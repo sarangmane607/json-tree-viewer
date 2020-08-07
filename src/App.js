@@ -196,7 +196,7 @@ export default function NavTabs() {
 						<div class="box">
 							<div class="row content">
 								<div style={{ height: "100%" }}>
-									{state.value == 1 && 
+									{state.value === 1 && 
 										<JOSNTree json={{ "JSON": getParsedJSON() }} level={0} path="" isLastElement={true} spacers={[]} expand={true} />
 									}
 									<br />
